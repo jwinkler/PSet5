@@ -171,7 +171,27 @@ def findBestShift(wordList, text):
     text: string
     returns: 0 <= int < 26
     """
-    ### TODO
+    max_real_words = 0
+    best_shift = 0
+    table = string.maketrans("","")
+    
+    for i in range(0, 26):
+        counter = 0
+        text_shift = applyShift(text, i)
+
+        shifted_list = text_shift.translate(table, string.punctuation).split()
+
+        for word in shifted_list:
+            if word in wordList:
+                counter += 1
+            
+        if counter > max_real_words:
+            max_real_words = counter
+            best_shift = i
+
+    return best_shift
+
+
 
 
 def decryptStory():
@@ -183,8 +203,12 @@ def decryptStory():
 
     returns: string - story in plain text
     """
-    ### TODO.
-    return "Not yet implemented." # Remove this comment when you code the function
+    story = getStoryString()
+
+    shift = findBestShift(wordList, story)
+
+    decrypted_story = applyShift(story, shift)
+    return decrypted_story # Remove this comment when you code the function
 
 #
 # Build data structures used for entire session and run encryption

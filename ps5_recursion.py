@@ -15,8 +15,10 @@ def reverseString(aStr):
     aStr: a string
     returns: a reversed string
     """
-    ### TODO.
-
+    if aStr == '':
+        return aStr
+    else:
+        return reverseString(aStr[1:]) + aStr[0]
 #
 # Problem 4: Erician
 #
@@ -36,8 +38,14 @@ def x_ian(x, word):
     word: a string
     returns: True if word is x_ian, False otherwise
     """
-    ###TODO.
-
+    if len(x) and not x[0] in word:
+        return False
+    if len(x) == 0:
+        return True  
+    else:
+        index = word.find(x[0])
+        return x_ian(x[1:], word[index+1:])
+    
 #
 # Problem 5: Typewriter
 #
@@ -52,4 +60,4 @@ def insertNewlines(text, lineLength):
         the next word.
     returns: a string, with newline characters inserted appropriately. 
     """
-    ### TODO.
+    
